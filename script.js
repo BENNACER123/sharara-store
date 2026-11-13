@@ -64,6 +64,8 @@ const checkoutForm = document.getElementById("checkout-form");
 const checkoutSuccess = document.getElementById("checkout-success");
 
 const toastContainer = document.getElementById("toast-container");
+const preloader = document.getElementById("preloader");
+const preloaderStartTime = Date.now();
 
 // =========================================================
 // الحالة (State)
@@ -138,7 +140,20 @@ async function fetchProducts() {
   } finally {
     skeletonGrid.hidden = true;
     productsGrid.hidden = false;
+    hidePreloaderWithMinDelay();
   }
+}
+
+// صفحة الانتظار تبقى ظاهرة ١.٢ ثانية على الأقل باش ما تبانش "ومضة" سريعة
+function hidePreloaderWithMinDelay() {
+  const minDisplayTime = 1200;
+  const elapsed = Date.now() - preloaderStartTime;
+  const remaining = Math.max(0, minDisplayTime - elapsed);
+
+  setTimeout(() => {
+    preloader.classList.add("hide");
+    setTimeout(() => preloader.remove(), 500);
+  }, remaining);
 }
 
 function renderSkeletons(count) {

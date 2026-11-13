@@ -32,6 +32,93 @@ body.light-theme {
   --accent-2: #0d9488;
 }
 
+/* =========================================================
+   Preloader (صفحة انتظار ثلاثية الأبعاد)
+   ========================================================= */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
+}
+
+.preloader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-scene {
+  perspective: 600px;
+}
+
+.preloader-cube {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cubeSpin 3s linear infinite;
+}
+
+.cube-face {
+  position: absolute;
+  inset: 0;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 184, 77, 0.25);
+}
+
+.cube-face.front {
+  transform: translateZ(35px);
+}
+.cube-face.back {
+  transform: rotateY(180deg) translateZ(35px);
+}
+.cube-face.right {
+  transform: rotateY(90deg) translateZ(35px);
+}
+.cube-face.left {
+  transform: rotateY(-90deg) translateZ(35px);
+}
+.cube-face.top {
+  transform: rotateX(90deg) translateZ(35px);
+}
+.cube-face.bottom {
+  transform: rotateX(-90deg) translateZ(35px);
+}
+
+@keyframes cubeSpin {
+  from {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+.preloader-text {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -1156,5 +1243,15 @@ button:focus-visible {
     transition: none !important;
     scroll-behavior: auto !important;
     animation: none !important;
+  }
+  .cube-face.front {
+    transform: translateZ(0);
+  }
+  .cube-face.back,
+  .cube-face.right,
+  .cube-face.left,
+  .cube-face.top,
+  .cube-face.bottom {
+    display: none;
   }
 }
