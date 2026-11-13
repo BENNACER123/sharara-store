@@ -4,6 +4,10 @@ A modern, responsive e-commerce storefront built with HTML, CSS, and Vanilla Jav
 
 Sharara Store provides a simple shopping experience where users can browse products, manage their shopping cart, update quantities, and track their selections.
 
+## Live Demo
+
+🔗 [https://bennacer123.github.io/sharara-store/](https://bennacer123.github.io/sharara-store/)
+
 ## Screenshots
 
 ### Homepage
